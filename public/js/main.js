@@ -15,7 +15,13 @@ var App = function (_React$Component) {
   function App() {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+
+    _this.state = {
+      name: "stateName",
+      title: "stateTitle"
+    };
+    return _this;
   }
 
   _createClass(App, [{
@@ -25,6 +31,7 @@ var App = function (_React$Component) {
       return React.createElement(
         "div",
         { className: "App" },
+        this.state.name,
         React.createElement(Header, { name: "header" }),
         React.createElement(Items, { name: "gym" }),
         React.createElement(AddItem, null)

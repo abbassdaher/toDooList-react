@@ -1,11 +1,19 @@
 // Component
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: "stateName",
+      title: "stateTitle",
+    };
+  }
   render() {
     console.log(this);
     return (
       <div className="App">
-        <Header name='header'></Header>
-        <Items name = "gym"/>
+        {this.state.name}
+        <Header name="header"></Header>
+        <Items name="gym" />
         <AddItem />
       </div>
     );
@@ -14,7 +22,7 @@ class App extends React.Component {
 class Header extends React.Component {
   render() {
     console.log(this);
-    return <header >{this.props.name}</header>;
+    return <header>{this.props.name}</header>;
   }
 }
 class Items extends React.Component {
