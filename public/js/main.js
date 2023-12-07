@@ -21,6 +21,11 @@ var App = function (_React$Component) {
       name: "stateName",
       title: "stateTitle"
     };
+    _this.changeTitle = function () {
+      _this.setState({
+        title: 'new stateTitle'
+      });
+    };
     return _this;
   }
 
@@ -31,9 +36,12 @@ var App = function (_React$Component) {
       return React.createElement(
         "div",
         { className: "App" },
-        React.createElement(Header, { StateName: this.state.name }),
-        React.createElement(Items, { name: "gym" }),
-        React.createElement(AddItem, null)
+        React.createElement(Header, { StateName: this.state.title }),
+        React.createElement(
+          "button",
+          { onClick: this.changeTitle },
+          "change"
+        )
       );
     }
   }]);

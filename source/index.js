@@ -6,14 +6,20 @@ class App extends React.Component {
       name: "stateName",
       title: "stateTitle",
     };
+    this.changeTitle = ()=>{
+      this.setState({
+        title:'new stateTitle'
+      })
+    }
   }
   render() {
     console.log(this);
     return (
       <div className="App">
-        <Header StateName ={this.state.name} />
-        <Items name="gym" />
-        <AddItem />
+        <Header StateName = {this.state.title} />
+        <button onClick = {this.changeTitle}>change</button>
+        {/* <Items name="gym" />
+        <AddItem /> */}
       </div>
     );
   }
