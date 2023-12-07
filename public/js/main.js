@@ -31,8 +31,7 @@ var App = function (_React$Component) {
       return React.createElement(
         "div",
         { className: "App" },
-        this.state.name,
-        React.createElement(Header, { name: "header" }),
+        React.createElement(Header, { StateName: this.state.name }),
         React.createElement(Items, { name: "gym" }),
         React.createElement(AddItem, null)
       );
@@ -58,7 +57,7 @@ var Header = function (_React$Component2) {
       return React.createElement(
         "header",
         null,
-        this.props.name
+        this.props.StateName
       );
     }
   }]);

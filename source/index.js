@@ -11,8 +11,7 @@ class App extends React.Component {
     console.log(this);
     return (
       <div className="App">
-        {this.state.name}
-        <Header name="header"></Header>
+        <Header StateName ={this.state.name} />
         <Items name="gym" />
         <AddItem />
       </div>
@@ -22,7 +21,7 @@ class App extends React.Component {
 class Header extends React.Component {
   render() {
     console.log(this);
-    return <header>{this.props.name}</header>;
+    return <header>{this.props.StateName}</header>;
   }
 }
 class Items extends React.Component {
