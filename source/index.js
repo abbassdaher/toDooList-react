@@ -6,20 +6,20 @@ class App extends React.Component {
       name: "stateName",
       title: "stateTitle",
     };
-    this.changeTitle = ()=>{
+    this.changeTitle = () => {
       this.setState({
-        title:'new stateTitle'
-      })
-    }
+        title: "new stateTitle",
+      });
+    };
   }
   render() {
     console.log(this);
     return (
       <div className="App">
-        <Header StateName = {this.state.title} />
-        <button onClick = {this.changeTitle}>change</button>
-        {/* <Items name="gym" />
-        <AddItem /> */}
+        <Header StateName={this.state.title} />
+        <button onClick={this.changeTitle}>change</button>
+        {/* <Items name="gym" />*/}
+        <AddItem />
       </div>
     );
   }
@@ -36,11 +36,28 @@ class Items extends React.Component {
   }
 }
 class AddItem extends React.Component {
+  constructor() {
+    super();
+    this.state = ({
+      name: "",
+    });
+    this.change = (e)=>{
+      console.log(e.target.value);
+      this.setState({
+      name : e.target.value
+    })
+    }
+    
+  }
+
   render() {
+    console.log(this);
     return (
       <form>
-        <input type="text" />
+        
+        <input type="text" onChange = {this.change}/>
         <button type="submit">AddItem</button>
+        <div>{this.state.name}</div>
       </form>
     );
   }

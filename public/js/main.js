@@ -23,7 +23,7 @@ var App = function (_React$Component) {
     };
     _this.changeTitle = function () {
       _this.setState({
-        title: 'new stateTitle'
+        title: "new stateTitle"
       });
     };
     return _this;
@@ -41,7 +41,8 @@ var App = function (_React$Component) {
           "button",
           { onClick: this.changeTitle },
           "change"
-        )
+        ),
+        React.createElement(AddItem, null)
       );
     }
   }]);
@@ -102,20 +103,38 @@ var AddItem = function (_React$Component4) {
   function AddItem() {
     _classCallCheck(this, AddItem);
 
-    return _possibleConstructorReturn(this, (AddItem.__proto__ || Object.getPrototypeOf(AddItem)).apply(this, arguments));
+    var _this4 = _possibleConstructorReturn(this, (AddItem.__proto__ || Object.getPrototypeOf(AddItem)).call(this));
+
+    _this4.state = {
+      name: ""
+    };
+    _this4.change = function (e) {
+      console.log(e.target.value);
+      _this4.setState({
+        name: e.target.value
+      });
+    };
+
+    return _this4;
   }
 
   _createClass(AddItem, [{
     key: "render",
     value: function render() {
+      console.log(this);
       return React.createElement(
         "form",
         null,
-        React.createElement("input", { type: "text" }),
+        React.createElement("input", { type: "text", onChange: this.change }),
         React.createElement(
           "button",
           { type: "submit" },
           "AddItem"
+        ),
+        React.createElement(
+          "div",
+          null,
+          this.state.name
         )
       );
     }
