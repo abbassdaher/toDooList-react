@@ -3,23 +3,31 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: "stateName",
-      title: "stateTitle",
+      products: [],
+      item: "",
     };
-    this.changeTitle = () => {
+    this.changeItemValue = (e) => {
       this.setState({
-        title: "new stateTitle",
+        item: e.target.value,
       });
+    };
+    this.onSubmitForm = (e) => {
+      e.preventDefault()
+      let products = [...this.state.products, this.state.item];
+      this.setState({
+        products
+      })
+      
     };
   }
   render() {
     console.log(this);
     return (
       <div className="App">
-        <Header StateName={this.state.title} />
-        <button onClick={this.changeTitle}>change</button>
-        {/* <Items name="gym" />*/}
-        <AddItem />
+        {this.state.item}
+        <Header />
+        <AddItem changeItemValue={this.changeItemValue} onSubmitForm = {this.onSubmitForm}/>
+        {console.log(this.state.products)}
       </div>
     );
   }
@@ -27,37 +35,24 @@ class App extends React.Component {
 class Header extends React.Component {
   render() {
     console.log(this);
-    return <header>{this.props.StateName}</header>;
+    return <header>ToDoo-List</header>;
   }
 }
 class Items extends React.Component {
   render() {
-    return <div>{this.props.name}</div>;
+    return <div></div>;
   }
 }
 class AddItem extends React.Component {
   constructor() {
     super();
-    this.state = ({
-      name: "",
-    });
-    this.change = (e)=>{
-      console.log(e.target.value);
-      this.setState({
-      name : e.target.value
-    })
-    }
-    
   }
 
   render() {
-    console.log(this);
     return (
-      <form>
-        
-        <input type="text" onChange = {this.change}/>
+      <form onSubmit = {this.props.onSubmitForm}>
+        <input type="text" onChange={this.props.changeItemValue} />
         <button type="submit">AddItem</button>
-        <div>{this.state.name}</div>
       </form>
     );
   }

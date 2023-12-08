@@ -2,6 +2,8 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -18,12 +20,19 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
     _this.state = {
-      name: "stateName",
-      title: "stateTitle"
+      products: [],
+      item: ""
     };
-    _this.changeTitle = function () {
+    _this.changeItemValue = function (e) {
       _this.setState({
-        title: "new stateTitle"
+        item: e.target.value
+      });
+    };
+    _this.onSubmitForm = function (e) {
+      e.preventDefault();
+      var products = [].concat(_toConsumableArray(_this.state.products), [_this.state.item]);
+      _this.setState({
+        products: products
       });
     };
     return _this;
@@ -36,13 +45,10 @@ var App = function (_React$Component) {
       return React.createElement(
         "div",
         { className: "App" },
-        React.createElement(Header, { StateName: this.state.title }),
-        React.createElement(
-          "button",
-          { onClick: this.changeTitle },
-          "change"
-        ),
-        React.createElement(AddItem, null)
+        this.state.item,
+        React.createElement(Header, null),
+        React.createElement(AddItem, { changeItemValue: this.changeItemValue, onSubmitForm: this.onSubmitForm }),
+        console.log(this.state.products)
       );
     }
   }]);
@@ -66,7 +72,7 @@ var Header = function (_React$Component2) {
       return React.createElement(
         "header",
         null,
-        this.props.StateName
+        "ToDoo-List"
       );
     }
   }]);
@@ -86,11 +92,7 @@ var Items = function (_React$Component3) {
   _createClass(Items, [{
     key: "render",
     value: function render() {
-      return React.createElement(
-        "div",
-        null,
-        this.props.name
-      );
+      return React.createElement("div", null);
     }
   }]);
 
@@ -103,38 +105,20 @@ var AddItem = function (_React$Component4) {
   function AddItem() {
     _classCallCheck(this, AddItem);
 
-    var _this4 = _possibleConstructorReturn(this, (AddItem.__proto__ || Object.getPrototypeOf(AddItem)).call(this));
-
-    _this4.state = {
-      name: ""
-    };
-    _this4.change = function (e) {
-      console.log(e.target.value);
-      _this4.setState({
-        name: e.target.value
-      });
-    };
-
-    return _this4;
+    return _possibleConstructorReturn(this, (AddItem.__proto__ || Object.getPrototypeOf(AddItem)).call(this));
   }
 
   _createClass(AddItem, [{
     key: "render",
     value: function render() {
-      console.log(this);
       return React.createElement(
         "form",
-        null,
-        React.createElement("input", { type: "text", onChange: this.change }),
+        { onSubmit: this.props.onSubmitForm },
+        React.createElement("input", { type: "text", onChange: this.props.changeItemValue }),
         React.createElement(
           "button",
           { type: "submit" },
           "AddItem"
-        ),
-        React.createElement(
-          "div",
-          null,
-          this.state.name
         )
       );
     }
