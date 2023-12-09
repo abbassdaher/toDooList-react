@@ -35,19 +35,31 @@ var App = function (_React$Component) {
         products: products
       });
     };
+    _this.listedItem = function () {
+      _this.state.products.map(function (item) {
+        return React.createElement(
+          "div",
+          null,
+          item
+        );
+      });
+    };
     return _this;
   }
 
   _createClass(App, [{
     key: "render",
     value: function render() {
-      console.log(this);
       return React.createElement(
         "div",
         { className: "App" },
-        this.state.item,
         React.createElement(Header, null),
-        React.createElement(AddItem, { changeItemValue: this.changeItemValue, onSubmitForm: this.onSubmitForm }),
+        React.createElement(AddItem, {
+          changeItemValue: this.changeItemValue,
+          onSubmitForm: this.onSubmitForm
+        }),
+        this.listedItem,
+        React.createElement(Items, { products: this.state.products }),
         console.log(this.state.products)
       );
     }
@@ -68,7 +80,6 @@ var Header = function (_React$Component2) {
   _createClass(Header, [{
     key: "render",
     value: function render() {
-      console.log(this);
       return React.createElement(
         "header",
         null,
@@ -92,7 +103,17 @@ var Items = function (_React$Component3) {
   _createClass(Items, [{
     key: "render",
     value: function render() {
-      return React.createElement("div", null);
+      return React.createElement(
+        "div",
+        null,
+        this.props.products.map(function (product) {
+          return React.createElement(
+            "div",
+            null,
+            product
+          );
+        })
+      );
     }
   }]);
 
@@ -105,7 +126,7 @@ var AddItem = function (_React$Component4) {
   function AddItem() {
     _classCallCheck(this, AddItem);
 
-    return _possibleConstructorReturn(this, (AddItem.__proto__ || Object.getPrototypeOf(AddItem)).call(this));
+    return _possibleConstructorReturn(this, (AddItem.__proto__ || Object.getPrototypeOf(AddItem)).apply(this, arguments));
   }
 
   _createClass(AddItem, [{
